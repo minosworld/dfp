@@ -1,0 +1,5 @@
+numpy
+easydict
+tensorflow-gpu
+matplotlib
+scipy
