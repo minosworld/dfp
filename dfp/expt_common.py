@@ -48,13 +48,13 @@ def start_experiment(gdict):
 
     # merge experiment params with default values
     target_maker_args = util.merge_two_dicts(defaults.target_maker_args, gdict['target_maker_args'])
-    simulator_args = util.merge_two_dicts(defaults.simulator_args, gdict['simulator_args'])
     train_experience_args = util.merge_two_dicts(defaults.train_experience_args, gdict['train_experience_args'])
     test_experience_args = util.merge_two_dicts(defaults.test_experience_args, gdict['test_experience_args'])
     agent_args = util.merge_two_dicts(defaults.agent_args, gdict['agent_args'])
     experiment_args = util.merge_two_dicts(defaults.experiment_args, gdict['experiment_args'])
 
     # some augmentation / copying between args
+    simulator_args = gdict['simulator_args']
     agent_args['log_dir'] = os.path.split(simulator_args['logdir'])[-2]
     agent_args['model_dir'] = os.path.split(simulator_args['logdir'])[-1]
     simulator_args['modalities'] = agent_args['modalities']

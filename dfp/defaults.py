@@ -13,35 +13,6 @@ target_maker_args['gammas'] = []
 #target_maker_args['invalid_targets_replacement'] = 'nan'
 target_maker_args['invalid_targets_replacement'] = 'last_valid'
 
-## Simulator
-simulator_args = {}
-simulator_args['task'] = 'room_goal'
-simulator_args['host'] = 'localhost'
-simulator_args['log_action_trace'] = False
-#simulator_args['goal'] = {'categories': ['arch', 'door'], 'select': 'random'}
-simulator_args['goal'] = {'roomTypes': 'any', 'select': 'random'}
-simulator_args['simulator'] = 'room_simulator'
-simulator_args['auto_start'] = True
-simulator_args['config'] = ''
-simulator_args['width'] = 84
-simulator_args['height'] = 84
-simulator_args['frame_skip'] = 1
-simulator_args['collision_detection'] = {'mode': 'navgrid'}
-simulator_args['color_mode'] = 'GRAY'
-simulator_args['maps'] = ['MAP01']
-simulator_args['switch_maps'] = False
-simulator_args['num_simulators'] = 1
-simulator_args['num_episodes_per_restart'] = 1000
-simulator_args['num_episodes_per_scene'] = 10
-simulator_args['game_args'] = ""
-simulator_args['scenes_file'] = '../data/scenes.multiroom.csv'
-#simulator_args['states_files'] = {'train': '', 'val': '../data/episode_states.val.csv', 'test': '../data/episode_states.test.csv'}
-simulator_args['states_file'] = '../data/episode_states.suncg.csv.bz2'
-simulator_args['roomtypes_file'] = '../data/roomTypes.suncg.csv'
-simulator_args['max_states_per_scene'] = 1
-simulator_args['navmap'] = {'refineGrid': True, 'autoUpdate': True, 'allowDiagonalMoves': True, 'reverseEdgeOrder': False},
-simulator_args['reward_type'] = 'dist_time'
-
 ## Experience
 # Train experience
 train_experience_args = {}
@@ -92,7 +63,6 @@ agent_args['random_exploration_schedule'] = lambda step: (0.02 + 72500. / (float
 # optimization parameters
 agent_args['batch_size'] = 64
 agent_args['init_learning_rate'] = 0.0002
-#agent_args['lr_step_size'] = 300000
 agent_args['lr_step_size'] = 125000
 agent_args['lr_decay_factor'] = 0.3
 agent_args['adam_beta1'] = 0.95
@@ -125,7 +95,6 @@ agent_args['roomtype_fc_params']  = np.array([(128,), (128,), (128,)], dtype = [
 agent_args['infer_roomtype_fc_params'] = np.array([(512,), (-1,)], dtype = [('out_dims',int)]) # we put -1 here because it will be automatically replaced when creating the net
 agent_args['actions_fc_params']   = np.array([(128,), (128,), (128,)], dtype = [('out_dims',int)])
 agent_args['obj_fc_params']  = None
-#np.array([(128,), (128,), (128,)], dtype = [('out_dims',int)]) 
 agent_args['meas_fc_params']  = np.array([(128,), (128,), (128,)], dtype = [('out_dims',int)]) 
 agent_args['force_fc_params'] = np.array([(128,), (128,), (128,)], dtype = [('out_dims',int)])
 agent_args['audiopath_fc_params'] = np.array([(128,), (128,), (128,)], dtype = [('out_dims',int)])
