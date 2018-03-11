@@ -1,6 +1,6 @@
 # Direct Future Prediction Agent for MINOS
 
-This repository contains code based on the paper "Learning to Act by Predicting the Future" by Alexey Dosovitskiy and Vladlen Koltun for use in the MINOS simulator.
+This repository contains code based on the paper [Learning to Act by Predicting the Future](https://github.com/IntelVCL/DirectFuturePrediction) by Alexey Dosovitskiy and Vladlen Koltun, adapted for use with the MINOS simulator.
 
 ## Installing
 
