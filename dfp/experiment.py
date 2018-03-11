@@ -99,14 +99,13 @@ class Experiment:
         pprint.pprint(all_args)
 
     def run(self, args):
-        mode = args if isinstance(args, str) else args.mode
-        test_dataset = 'val' if isinstance(args, str) else args.test_dataset
-        if mode == 'train':
+        test_dataset = args.get('test_dataset', 'val')
+        if args['mode'] == 'train':
             self.test_experience.log_prefix = os.path.join(self.logdir, 'log')
             self.ag.train(self.train_multi_simulator, self.train_experience, self.num_train_iterations,
                           test_simulator=self.test_multi_simulator, test_experience=self.test_experience,
                           test_random_prob=self.test_random_prob, test_dataset=test_dataset)
-        elif mode == 'show':
+        elif args['mode'] == 'show':
             if not self.ag.load(self.test_checkpoint):
                 raise Exception('Could not load the checkpoint ', self.test_checkpoint)
             self.test_experience.head_offset = self.test_policy_num_steps + 1
@@ -121,9 +120,9 @@ class Experiment:
                                       display=True, write_imgs=False,
                                       show_predictions=self.show_predictions,
                                       net_discrete_actions = self.ag.net_discrete_actions)
-        elif mode == 'test':
+        elif args['mode'] == 'test':
             self.test_experience.log_prefix = 'logs/log_test'
-            all_checkpoints = my_util.list_checkpoints(self.test_checkpoint, args.test_checkpoint_range)
+            all_checkpoints = my_util.list_checkpoints(self.test_checkpoint, args['test_checkpoint_range'])
             for step in sorted(all_checkpoints):
                 ckpt = all_checkpoints[step]
                 self.ag.load_checkpoint(ckpt)
@@ -132,12 +131,12 @@ class Experiment:
                                                 num_steps=self.test_policy_num_steps,
                                                 random_prob=self.test_random_prob, write_summary=False,
                                                 write_predictions=False, test_dataset=test_dataset)
-                if 'save_video' in args and args.save_video is not None:
-                    videofile = args.save_video + '.%s.ckpt-%d.mp4' % (test_dataset, step)
+                if 'save_video' in args and args['save_video'] is not None:
+                    videofile = args['save_video'] + '.%s.ckpt-%d.mp4' % (test_dataset, step)
                     print('Writing video to ' + videofile + ' ...')
                     self.test_experience.write_video(videofile, start_index=0, end_index=num_steps)
         else:
-            print('Unknown mode', mode)
+            print('Unknown mode', args['mode'])
 
     def stop(self):
         self.train_multi_simulator.close()

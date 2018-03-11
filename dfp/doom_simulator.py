@@ -13,7 +13,7 @@ class DoomSimulator:
         self.modalities = args['modalities']
         self.outputs = args['outputs']
         self.config = args['config']
-        self.resolution = args['resolution']
+        self.resolution = (args['width'], args['height'])
         self.frame_skip = args['frame_skip']
         self.color_mode = args['color_mode']
         #self.use_shaping_reward = args['use_shaping_reward']

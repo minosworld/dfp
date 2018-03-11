@@ -23,13 +23,13 @@ simulator_args['goal'] = {'roomTypes': 'any', 'select': 'random'}
 simulator_args['simulator'] = 'room_simulator'
 simulator_args['auto_start'] = True
 simulator_args['config'] = ''
-simulator_args['resolution'] = (84,84)
+simulator_args['width'] = 84
+simulator_args['height'] = 84
 simulator_args['frame_skip'] = 1
 simulator_args['collision_detection'] = {'mode': 'navgrid'}
 simulator_args['color_mode'] = 'GRAY'
 simulator_args['maps'] = ['MAP01']
 simulator_args['switch_maps'] = False
-#simulator_args['num_simulators'] = 8
 simulator_args['num_simulators'] = 1
 simulator_args['num_episodes_per_restart'] = 1000
 simulator_args['num_episodes_per_scene'] = 10
@@ -103,10 +103,8 @@ agent_args['clip_gradient'] = 0
 
 # directories
 agent_args['checkpoint_dir'] = 'checkpoints'
-agent_args['log_dir'] = 'logs'
 agent_args['init_model'] = ''
 agent_args['model_name'] = "predictor.model"
-agent_args['model_dir'] = time.strftime("%Y_%m_%d_%H_%M_%S")
 
 # logging and testing
 agent_args['print_err_every'] = 50
