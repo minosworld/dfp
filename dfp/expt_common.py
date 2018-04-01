@@ -17,9 +17,7 @@ def run_exp_parse_args():
     parser = argparse.ArgumentParser(description='MINOS DFP experiment')
     add_sim_args(parser)
     parser.add_argument('mode', help='Experiment mode (train|test|show)')
-    parser.add_argument('--env_config',
-                        default='objectgoal_suncg_sf',
-                        help='Environment configuration file')
+    parser.add_argument('--gpu', action='store_true', help='Whether to use GPU')
     parser.add_argument('--test_checkpoint', type=str,
                         default='',
                         help='Checkpoint directory to load for testing')

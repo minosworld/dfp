@@ -74,8 +74,11 @@ class Experiment:
         self.test_experience = ExperienceMemory(test_experience_args, multi_simulator=self.test_multi_simulator,
                                                 target_maker=self.target_maker)
 
-        gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.1)  # avoid using all gpu memory
-        self.sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options,log_device_placement=False))
+        if simulator_args['gpu']:
+            gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.1)  # avoid using all gpu memory
+            self.sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options,log_device_placement=False))
+        else:
+            self.sess = tf.Session(config=tf.ConfigProto())
 
         if self.agent_type == 'advantage':
             self.ag = AgentMultimodalAdvantage(self.sess, agent_args)
